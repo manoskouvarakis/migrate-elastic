@@ -1,0 +1,56 @@
+{
+  "name": "migrate-elastic",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "clean": "rm -rf ./build",
+    "prebuild": "npm run clean",
+    "build": "tsc -p src && chmod +x build/index.js",
+    "prewatch": "npm run clean",
+    "watch": "tsc -w -p src",
+    "prepublishOnly": "npm run build && npm test",
+    "pretest": "tslint --project ./src/ && tslint ./test/**/*.ts && npm run build",
+    "test": "nyc mocha",
+    "prepare": "npm run build",
+    "start": "TS_NODE_PROJECT=./build/ node --max_old_space_size=${MAX_OLD_SPACE_SIZE:-384} ./build/index.js"
+  },
+  "keywords": [
+    "migration",
+    "elasticsearch",
+    "elastic",
+    "template",
+    "reindex"
+  ],
+  "bin": {
+    "migrate-elastic": "./build/src/index.js"
+  },
+  "author": "Manos Kouvarakis",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.13.0",
+    "date-fns": "^2.23.0",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.21.0",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.12",
+    "@types/lodash": "^4.14.176",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.14.7",
+    "@types/yargs": "^17.0.2",
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0",
+    "prettier": "^1.19.1",
+    "should": "^13.2.3",
+    "ts-node": "^9.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.5"
+  },
+  "engines": {
+    "node": "14.15.x"
+  }
+}

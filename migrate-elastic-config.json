@@ -1,0 +1,7 @@
+{
+  "elastic": {
+    "url": "http://localhost:9200"
+  },
+  "migrationsDir": "migrations",
+  "changelogIndexName": "changelog"
+}
